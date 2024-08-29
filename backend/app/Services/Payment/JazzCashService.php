@@ -8,21 +8,19 @@ use HiEvents\backend\exceptions\ApplicationException;
 
 class JazzCashService
 {
-    public function createPayment(float $amount, string $orderId): array
+    public function initiatePayment($amount): array
     {
-        
-            return JazzCash::request()
-                ->setAmount($amount)
-                ->setTransactionId($orderId)
-                ->toArray();
-        
+        try {
+            $data = JazzCash::request()->setAmount($amount)->toArray();
+
+            return $data;
+        } catch (Exception $e) {
+            throw new ApplicationException('Failed to initiate JazzCash payment: ' . $e->getMessage());
+        }
     }
 
     public function verifyPayment(array $response): bool
     {
-       
         return $response['pp_ResponseCode'] === '000';
     }
-
-    // Consider
 }

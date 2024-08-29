@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Actions\HandleJazzCashResponse;
-use app\actions\InitiateJazzCashPayment;
+use HiEvents\Http\Actions\Orders\InitiateJazzCashPayment;
 
 
 /*
@@ -19,4 +19,10 @@ use app\actions\InitiateJazzCashPayment;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+
+
+
+
 

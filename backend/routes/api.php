@@ -184,9 +184,10 @@ $router->middleware(['auth:api'])->group(
         $router->post('/events/{event_id}/attendees/{attendee_public_id}/resend-ticket', ResendAttendeeTicketAction::class);
         $router->post('/events/{event_id}/attendees/{attendee_public_id}/check_in', CheckInAttendeeAction::class);
 
-        //jazzcash stuff
-        $router->post('/events/{event_id}/tickets/{ticket_id}/jazzcash/payment', InitiateJazzCashPayment::class . '@handle')->name('jazzcash.payment');
-        $router->post('/events/{event_id}/tickets/{ticket_id}/jazzcash/response', HandleJazzCashPayment::class . '@handle')->name('jazzcash.response');
+//jazzcash stuff
+        $router->post('/events/{event_id}/orders/{order_short_id}/jazzcash/response', [HandleJazzCashPayment::class, 'handle'])->name('jazzcash.response');
+        $router->post('/events/{eventId}/orders/{orderShortId}/jazzcash/initiate', [InitiateJazzCashPayment::class, 'handle'])->name('jazzcash.payment.initiate');
+        $router->post('/events/{eventId}/orders/{orderShortId}/jazzcash/payment', [InitiateJazzCashPayment::class, 'handle'])->name('jazzcash.payment');
         
         $router->get('/events/{event_id}/orders/{order_id}', GetOrderAction::class);
         $router->post('/events/{event_id}/orders/{order_id}/message', MessageOrderAction::class);

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { LoadingMask } from '../../common/LoadingMask';
 import axios from 'axios';
-import { showError, showSuccess } from '../../../utilites/notifications.tsx';
+import { showError, showSuccess } from '../../../utilities/notifications';
 import { t } from "@lingui/macro";
 
 const JazzCashResponse = () => {
@@ -16,7 +16,7 @@ const JazzCashResponse = () => {
             const searchParams = new URLSearchParams(location.search);
             
             try {
-                const response = await axios.post(`/api/events/${eventId}/tickets/${orderShortId}/jazzcash/process`, {
+                const response = await axios.post(`/api/events/${eventId}/orders/${orderShortId}/jazzcash/response`, {
                     pp_ResponseCode: searchParams.get('pp_ResponseCode'),
                     pp_ResponseMessage: searchParams.get('pp_ResponseMessage'),
                     pp_TxnRefNo: searchParams.get('pp_TxnRefNo'),

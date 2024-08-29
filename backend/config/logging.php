@@ -92,6 +92,10 @@ return [
                 'connectionString' => 'tls://'.env('PAPERTRAIL_URL').':'.env('PAPERTRAIL_PORT'),
             ],
             'processors' => [PsrLogMessageProcessor::class],
+
+        'flare' => [
+           'driver' => 'flare',
+],
         ],
 
         'stderr' => [

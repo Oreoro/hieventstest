@@ -6,7 +6,7 @@
     <title>JazzCash Payment</title>
 </head>
 <body>
-    <form name="redirect-to-payment-gateway" method="POST" action="{{ config('jazzcash.' . env('JAZZCASH_ENVIRONMENT') . '.endpoint') }}">
+    <form name="redirect-to-payment-gateway" method="POST" action="{{ $endpoint }}">
         @csrf
         @foreach($data as $key => $value)
             <input type="hidden" name="{{ $key }}" value="{{ $value }}">

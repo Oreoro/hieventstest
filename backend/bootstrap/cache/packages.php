@@ -93,15 +93,4 @@
       'Flare' => 'Spatie\\LaravelIgnition\\Facades\\Flare',
     ),
   ),
-  'zfhassaan/jazzcash' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'zfhassaan\\jazzcash\\provider\\ServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'jazzcash' => 'zfhassaan\\jazzcash\\facade\\JazzcashFacade',
-    ),
-  ),
 );

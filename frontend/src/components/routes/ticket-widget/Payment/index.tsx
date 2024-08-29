@@ -10,7 +10,7 @@ const Payment = () => {
   useEffect(() => {
     const fetchPaymentData = async () => {
       try {
-        const response = await axios.get(`/api/events/${eventId}/tickets/${orderShortId}/jazzcash/payment`);
+        const response = await axios.get(`/api/events/${eventId}/orders/${orderShortId}/jazzcash/initiate`);
         setPaymentData(response.data);
       } catch (error) {
         console.error('Error fetching payment data:', error);
