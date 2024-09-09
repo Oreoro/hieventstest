@@ -59,6 +59,7 @@ use HiEvents\Http\Actions\Orders\CreateOrderActionPublic;
 use HiEvents\Http\Actions\Orders\ExportOrdersAction;
 use HiEvents\Http\Actions\Orders\GetOrderAction;
 use HiEvents\Http\Actions\Orders\GetOrderActionPublic;
+use HiEvents\Http\Actions\Orders\GetOrdersAction;
 use HiEvents\Http\Actions\Orders\MessageOrderAction;
 use HiEvents\Http\Actions\Orders\ResendOrderConfirmationAction;
 use HiEvents\Http\Actions\Organizers\CreateOrganizerAction;
@@ -161,7 +162,7 @@ $router->middleware(['auth:api'])->group(
 
         $router->post('/events', CreateEventAction::class);
         $router->get('/events', GetEventsAction::class);
-        $router->get('/events/{event_id}', GetEventAction::class);
+        $router->get('/events/{event_id}', GetEventAction::class)->where('event_id', '[0-9]+');
         $router->put('/events/{event_id}', UpdateEventAction::class);
         $router->put('/events/{event_id}/status', UpdateEventStatusAction::class);
         $router->post('/events/{event_id}/duplicate', DuplicateEventAction::class);
@@ -184,11 +185,6 @@ $router->middleware(['auth:api'])->group(
         $router->post('/events/{event_id}/attendees/{attendee_public_id}/resend-ticket', ResendAttendeeTicketAction::class);
         $router->post('/events/{event_id}/attendees/{attendee_public_id}/check_in', CheckInAttendeeAction::class);
 
-//jazzcash stuff
-        $router->post('/events/{event_id}/orders/{order_short_id}/jazzcash/response', [HandleJazzCashPayment::class, 'handle'])->name('jazzcash.response');
-        $router->post('/events/{eventId}/orders/{orderShortId}/jazzcash/initiate', [InitiateJazzCashPayment::class, 'handle'])->name('jazzcash.payment.initiate');
-        $router->post('/events/{eventId}/orders/{orderShortId}/jazzcash/payment', [InitiateJazzCashPayment::class, 'handle'])->name('jazzcash.payment');
-        
         $router->get('/events/{event_id}/orders/{order_id}', GetOrderAction::class);
         $router->post('/events/{event_id}/orders/{order_id}/message', MessageOrderAction::class);
         $router->post('/events/{event_id}/orders/{order_id}/resend_confirmation', ResendOrderConfirmationAction::class);
@@ -241,14 +237,15 @@ $router->prefix('/public')->group(
     function (Router $router): void {
         // Events
         $router->get('/events/{event_id}', GetEventPublicAction::class);
+        $router->get('/events/{event_id}/orders', GetOrdersAction::class);
 
         // Tickets
         $router->get('/events/{event_id}/tickets', GetEventPublicAction::class);
 
         // Orders
-        $router->post('/events/{event_id}/order', CreateOrderActionPublic::class);
-        $router->put('/events/{event_id}/order/{order_short_id}', CompleteOrderActionPublic::class);
-        $router->get('/events/{event_id}/order/{order_short_id}', GetOrderActionPublic::class);
+        $router->post('/events/{event_id}/orders', CreateOrderActionPublic::class);
+        $router->put('/events/{event_id}/orders/{order_short_id}', CompleteOrderActionPublic::class);
+        $router->get('/events/{event_id}/orders/{order_short_id}', GetOrderActionPublic::class);
 
         // Attendees
         $router->get('/events/{event_id}/attendees/{attendee_short_id}', GetAttendeeActionPublic::class);
@@ -260,7 +257,7 @@ $router->prefix('/public')->group(
         $router->get('/events/{event_id}/questions', GetQuestionsPublicAction::class);
 
       
-
+      
         // Check-In
         $router->get('/check-in-lists/{check_in_list_short_id}', GetCheckInListPublicAction::class);
         $router->get('/check-in-lists/{check_in_list_short_id}/attendees', GetCheckInListAttendeesPublicAction::class);
@@ -268,11 +265,12 @@ $router->prefix('/public')->group(
         $router->delete('/check-in-lists/{check_in_list_short_id}/check-ins/{check_in_short_id}', DeleteAttendeeCheckInPublicAction::class);
 
         // JazzCash
-        
+        $router->post('/events/{event_id}/orders/{order_id}/jazzcash/initiate', InitiateJazzCashPayment::class);
+        $router->post('/jazzcash/response/{event_id}/{order_id}', [HandleJazzCashPayment::class, 'handle'])->name('jazzcash.response');
 
-include_once __DIR__ . '/mail.php';
-
-});
+        include_once __DIR__ . '/mail.php';
+    }
+);
 
 
 

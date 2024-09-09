@@ -3,6 +3,7 @@
 namespace HiEvents\Http\Actions\Orders;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use HiEvents\DomainObjects\AttendeeDomainObject;
 use HiEvents\DomainObjects\OrderItemDomainObject;
 use HiEvents\DomainObjects\QuestionAndAnswerViewDomainObject;
@@ -21,12 +22,20 @@ class GetOrderAction extends BaseAction
 
     public function __invoke(int $eventId, int $orderId): JsonResponse
     {
-        $order = $this->orderRepository
-            ->loadRelation(OrderItemDomainObject::class)
-            ->loadRelation(AttendeeDomainObject::class)
-            ->loadRelation(QuestionAndAnswerViewDomainObject::class)
-            ->findById($orderId);
+        try {
+            $order = $this->orderRepository
+                ->loadRelation(OrderItemDomainObject::class)
+                ->loadRelation(AttendeeDomainObject::class)
+                ->loadRelation(QuestionAndAnswerViewDomainObject::class)
+                ->findById($orderId);
 
-        return $this->resourceResponse(OrderResource::class, $order);
+            if (!$order || $order->getEventId() !== $eventId) {
+                return response()->json(['error' => "Order not found with order_id: $orderId"], 404);
+            }
+
+            return $this->resourceResponse(OrderResource::class, $order);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['error' => 'Order not found'], 404);
+        }
     }
 }

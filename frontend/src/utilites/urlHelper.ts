@@ -2,7 +2,7 @@ import {Event, IdParam} from "../types.ts";
 import {getConfig} from "./config.ts";
 
 export const eventCheckoutPath = (eventId: IdParam, orderShortId: IdParam, subPage = '') => {
-    return `/checkout/${eventId}/${orderShortId}/jazzcash/payment`;
+    return `/checkout/${eventId}/${orderShortId}${subPage ? `/${subPage}` : ''}`;
 }
 
 export const eventHomepagePath = (event: Event) => {

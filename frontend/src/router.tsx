@@ -368,7 +368,6 @@ export const router: RouteObject[] = [
                     return {Component: CollectInformation.default};
                 }
             },
-           
             {
                 path: ":orderShortId/summary",
                 async lazy() {
@@ -376,19 +375,25 @@ export const router: RouteObject[] = [
                     return {Component: OrderSummaryAndTickets.default};
                 }
             },
-          
             {
                 path: ":orderShortId/payment",
+                async lazy() {
+                    const Payment = await import("./components/routes/ticket-widget/Payment");
+                    return { Component: Payment.default };
+                },
+            },
+            {
+                path: ":orderShortId/jazzcash/initiate",
                 async lazy() {
                     const JazzCashPayment = await import("./components/routes/jazzcash/JazzCashPayment");
                     return { Component: JazzCashPayment.default };
                 },
             },
             {
-                path: ":orderShortId/payment_return",
+                path: ":orderShortId/jazzcash/response",
                 async lazy() {
-                    const JazzCashResponse = await import("./components/routes/jazzcash/JazzCashResponse");
-                    return { Component: JazzCashResponse.default };
+                  const JazzCashResponse = await import("./components/routes/jazzcash/JazzCashResponse");
+                  return { Component: JazzCashResponse.default };
                 },
             }
         ]

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { LoadingMask } from '../../common/LoadingMask';
+import { t } from "@lingui/macro";
+import { LoadingMask } from '../../../common/LoadingMask';
 
-const JazzCashPayment = () => {
-    const { event_id, orderShortId } = useParams();
-    const [error, setError] = useState(null);
+const JazzCashForm: React.FC = () => {
+    const { event_id, orderShortId } = useParams<{ event_id: string, orderShortId: string }>();
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const initiatePayment = async () => {
@@ -29,16 +31,25 @@ const JazzCashPayment = () => {
                 document.body.appendChild(form);
                 form.submit();
             } catch (error) {
-                console.error('Error initiating payment:', error);
-                setError(error.response?.data?.message || 'Failed to initiate payment. Please try again later.');
+                console.error('Error initiating JazzCash payment:', error);
+                setError('Failed to initiate payment. Please try again.');
+            } finally {
+                setLoading(false);
             }
         };
 
         initiatePayment();
     }, [event_id, orderShortId]);
 
-    if (error) return <div className="error-message">{error}</div>;
-    return <LoadingMask />;
+    if (loading) return <LoadingMask />;
+    if (error) return <div>{error}</div>;
+
+    return (
+        <div>
+            <h3>{t`JazzCash Payment`}</h3>
+            <p>{t`Redirecting to JazzCash payment page...`}</p>
+        </div>
+    );
 };
 
-export default JazzCashPayment;
+export default JazzCashForm;

@@ -5,9 +5,16 @@ namespace HiEvents\Models;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Model;
 
 class Order extends BaseModel
 {
+    protected $keyType = 'string';
+    public $incrementing = false;
+
+    // If your ID column in the database is not named 'id', specify it here:
+    // protected $primaryKey = 'your_id_column_name';
+
     public function question_and_answer_views(): HasMany
     {
         return $this->hasMany(QuestionAndAnswerView::class);
@@ -51,5 +58,10 @@ class Order extends BaseModel
     protected function getFillableFields(): array
     {
         return [];
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'short_id'; // Replace 'short_id' with the actual column name for your order identifier
     }
 }

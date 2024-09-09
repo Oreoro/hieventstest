@@ -7,17 +7,13 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  filter: blur(10px);
+  filter: grayscale(100%);
   z-index: -1;
-  transform: scale(2);
+  transform: scale(1.1);
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
-
-  @include respond-below(sm) {
-    display: none;
-  }
 }
 
 .styleContainer {
@@ -29,36 +25,29 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  max-width: 1000px;
-  border-radius: 5px;
-  margin: 30px;
+  max-width: 1200px;
+  border-radius: 0;
+  margin: 40px;
   overflow: hidden;
-  box-shadow: 0px 0px 6px 0px #00000025;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 
   @include respond-above(md) {
-    min-width: 730px;
+    min-width: 800px;
   }
 
   @include respond-below(md) {
     margin: 0;
-    border-radius: 0;
-    box-shadow: none;
     width: 100%;
-  }
-
-  @include respond-below(sm) {
-    border-radius: 0;
-    margin: 0;
   }
 
   .innerContainer {
     display: flex;
     flex-direction: column;
-    max-width: 1000px;
+    max-width: 1200px;
     place-self: center;
-    background-color: var(--homepage-background-color, var(--tk-color-white));
-    color: var(--homepage-primary-text-color, var(--tk-primary));
-    padding: 35px;
+    background-color: var(--tk-color-white);
+    color: var(--tk-text);
+    padding: 40px;
     width: 100%;
 
     @include respond-below(md) {
@@ -67,7 +56,7 @@
     }
 
     a {
-      color: var(--homepage-primary-text-color, var(--tk-primary)) !important;
+      color: var(--tk-primary) !important;
     }
 
     .eventInfo {
@@ -75,14 +64,9 @@
     }
 
     .ticketSelection {
-      //background-color: #fff;
-      //border-radius: 5px;
-      //overflow: hidden;
-      //box-shadow: 0 2px 5px 2px #00000012;
-
       .buyTicketsBox {
-        border-radius: 10px;
-        border: 1px solid #ddd;
+        border-radius: 0;
+        border: 1px solid var(--tk-color-gray-2);
         position: sticky;
         top: 20px;
         width: 300px;

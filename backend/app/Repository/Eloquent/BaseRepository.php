@@ -106,7 +106,7 @@ abstract class BaseRepository implements RepositoryInterface
         return $this->handleResults($relation->paginate($this->getPaginationPerPage($limit), $columns));
     }
 
-    public function findById(int $id, array $columns = self::DEFAULT_COLUMNS): DomainObjectInterface
+    public function findById($id, array $columns = self::DEFAULT_COLUMNS): DomainObjectInterface
     {
         return $this->handleSingleResult($this->model->findOrFail($id, $columns));
     }

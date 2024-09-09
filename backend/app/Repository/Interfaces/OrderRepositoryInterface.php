@@ -14,12 +14,14 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
  * @extends BaseRepository<OrderDomainObject>
  */
 interface OrderRepositoryInterface extends RepositoryInterface
+
 {
-    public function findByEventId(int $eventId, QueryParamsDTO $params): LengthAwarePaginator;
+    public function save(OrderDomainObject $order): OrderDomainObject;
+    public function findByEventId(int $event_id, QueryParamsDTO $params): LengthAwarePaginator;
 
-    public function getOrderItems(int $orderId);
+    public function getOrderItems(int $order_id);
 
-    public function getAttendees(int $orderId);
+    public function getAttendees(int $order_id);
 
     public function addOrderItem(array $data): OrderItemDomainObject;
 

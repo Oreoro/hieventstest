@@ -17,13 +17,13 @@ class DeletePromoCodeAction extends BaseAction
     {
     }
 
-    public function __invoke(Request $request, int $eventId, int $promoCodeId): Response
+    public function __invoke(Request $request, int $event_id, int $promoCodeId): Response
     {
-        $this->isActionAuthorized($eventId, EventDomainObject::class);
+        $this->isActionAuthorized($event_id, EventDomainObject::class);
 
         $this->deletePromoCodeHandler->handle(DeletePromoCodeDTO::fromArray([
             'promo_code_id' => $promoCodeId,
-            'event_id' => $eventId,
+            'event_id' => $event_id,
             'user_id' => $request->user()->id,
         ]));
 

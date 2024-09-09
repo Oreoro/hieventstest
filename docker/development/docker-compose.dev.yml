@@ -13,6 +13,7 @@ services:
         environment:
               APP_ENV: '${APP_ENV:-local}'
               APP_KEY: '${APP_KEY}'
+              APP_URL: 'https://${NGROK_SUBDOMAIN}.ngrok.io'
         depends_on:
             - redis
             - mailpit
@@ -169,6 +170,16 @@ services:
             echo 'Buckets created and policies set.';
             exit 0;
             "
+        networks:
+            - app
+
+    ngrok:
+        image: ngrok/ngrok:latest
+        command: http nginx:80
+        environment:
+            - NGROK_AUTHTOKEN=2keMpkFtaHuA1FRt6hoixJcSnIR_73YA2ESzbmsrktmUQqXZx
+        depends_on:
+            - nginx
         networks:
             - app
 

@@ -22,10 +22,10 @@ export const CheckoutFooter = ({ isLoading, buttonText, event, order, isOrderCom
     const navigate = useNavigate(); // Add useNavigate hook
 
         const handlePayment = () => {
-            if (order && order.short_id) {
-                navigate(`/checkout/${event.id}/${order.short_id}/payment`);
+            if (order && order.short_id && event.id) {
+                navigate(`/checkout/${event.id}/${order.short_id}/jazzcash/initiate`);
             } else {
-                console.error('Order short ID is undefined');
+                console.error('Order short ID or event ID is undefined');
                 // Optionally, show an error message to the user
             }
         };

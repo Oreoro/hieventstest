@@ -44,6 +44,10 @@ readonly class OrderItemProcessingService
         ?PromoCodeDomainObject $promoCode
     ): Collection
     {
+        if ($order->getId() === null) {
+            throw new \RuntimeException('Order must have an ID before creating order items');
+        }
+
         $orderItems = collect();
 
         foreach ($ticketsOrderDetails as $ticketOrderDetail) {

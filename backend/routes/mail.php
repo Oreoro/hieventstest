@@ -38,5 +38,7 @@ Route::get('/mail-test', static function () {
         ->setTimeZone('UTC')
         ->setOrganizer($organizer);
 
+    $id = $order->getId() ?? 0; // Use 0 or any appropriate default value
+
     return new OrderSummaryForOrganizer($order, $event);
 });

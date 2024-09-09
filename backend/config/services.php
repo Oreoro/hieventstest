@@ -35,7 +35,7 @@ return [
         'merchant_id' => env('JAZZCASH_MERCHANT_ID'),
         'password' => env('JAZZCASH_PASSWORD'),
         'integrity_salt' => env('JAZZCASH_INTEGRITY_SALT'),
-        'return_url' => env('JAZZCASH_RETURN_URL'),
+        'return_url' => env('APP_URL') . '/api/jazzcash/response',
         'environment' => env('JAZZCASH_ENVIRONMENT', 'sandbox'),
     ],
 ];

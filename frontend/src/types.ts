@@ -530,11 +530,11 @@ export type QueryFilterFields = {
 }
 
 export interface QueryFilters {
-    pageNumber?: number;
-    perPage?: number;
+    page?: number;
+    per_page?: number;
     query?: string;
-    sortBy?: string;
-    sortDirection?: string;
+    sort_by?: string;
+    sort_direction?: 'asc' | 'desc';
     filterFields?: QueryFilterFields;
     additionalParams?: Record<string, any>;
 }

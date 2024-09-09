@@ -1,14 +1,14 @@
 .hi-ticket-widget-container {
-  background-color: var(--widget-background-color, var(--tk-color-white));
-  color: var(--widget-primary-text-color);
-  padding: var(--widget-padding, var(--tk-spacing-md));
+  background-color: var(--tk-color-white);
+  color: var(--tk-text);
+  padding: var(--tk-spacing-md);
 
   &.full-height {
     height: 100vh;
   }
 
   a, button {
-    color: var(--widget-primary-text-color, var(--tk-primary));
+    color: var(--tk-primary);
   }
 
   .hi-ticket-rows {
@@ -20,9 +20,9 @@
     .hi-ticket-row {
       display: flex;
       flex-flow: column;
-      border: 3px solid var(--widget-primary-color, var(--tk-secondary));
-      padding: 10px 20px 20px;
-      border-radius: 5px;
+      border: 1px solid var(--tk-color-gray-2);
+      padding: 20px;
+      border-radius: 0;
 
       .hi-ticket-description-row {
         font-size: .9em;
@@ -30,100 +30,53 @@
 
       .hi-title-row {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
 
         .hi-ticket-title {
-          flex: 1;
           font-weight: bold;
 
           h3 {
-            margin: 10px 0;
+            margin: 0 0 10px 0;
           }
         }
 
         .hi-ticket-availability {
           text-align: right;
-          color: var(--widget-primary-text-color);
+          color: var(--tk-secondary-text);
         }
       }
 
       .hi-price-tiers-rows {
         .ticketPrice {
-
-          .hi-price-tier-amount {
-            span:first-child {
-              display: block;
-              color: #909090;
-              font-size: .85em;
-            }
-          }
-        }
-      }
-
-      .hi-ticket-quantity-error {
-        color: var(--widget-primary-color, var(--tk-primary));
-        background-color: var(--widget-background-color, var(--tk-color-white));
-        border: 2px solid var(--widget-primary-color, var(--tk-primary));
-        padding: 10px 20px;
-        margin: 10px 0;
-        border-radius: 5px;
-      }
-
-      .hi-price-tier-row {
-        margin-bottom: 10px;
-
-        .hi-price-tier {
-          .hi-price-tier-label {
-            font-weight: bold;
-          }
-
-          .hi-price-tier-price {
-            .hi-price-tier-price-amount {
-              display: flex;
-              gap: 5px;
-
-              svg {
-                margin-top: 3px;
-              }
-            }
-
-            .hi-donation-input-wrapper {
-              .hi-donation-input {
-                color: var(--widget-primary-text-color, var(--tk-primary));
-                background-color: var(--widget-background-color, var(--tk-color-white));
-                border: 2px solid var(--widget-primary-color, var(--tk-primary));
-              }
-            }
-          }
+          font-weight: bold;
         }
 
-        .hi-ticket-quantity-selector {
-          .button-input {
-            input {
-              color: var(--widget-primary-text-color, var(--tk-primary));
-            }
+        .hi-ticket-quantity-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-top: 10px;
 
-            button {
-              &:disabled {
-                border: none;
-                opacity: .5;
-              }
-
-              background-color: var(--widget-secondary-color, var(--tk-primary));
-              color: var(--widget-secondary-text-color, var(--tk-color-white));
-            }
+          .hi-ticket-quantity-input {
+            width: 60px;
+            text-align: center;
+            border: 1px solid var(--tk-color-gray-2);
+            padding: 5px;
           }
 
-          .select-input {
-            input {
-              background-color: var(--widget-background-color, var(--tk-color-white));
-              border: 2px solid var(--widget-primary-color, var(--tk-primary));
-              color: var(--widget-primary-text-color, var(--tk-primary));
+          .hi-ticket-quantity-button {
+            background-color: var(--tk-color-white);
+            border: 1px solid var(--tk-color-gray-2);
+            padding: 5px 10px;
+            cursor: pointer;
+
+            &:hover {
+              background-color: var(--tk-color-gray);
             }
 
             svg {
-              color: var(--widget-primary-text-color, var(--tk-primary));
+              color: var(--tk-primary);
             }
           }
         }
@@ -140,16 +93,25 @@
     .hi-promo-code-input {
       flex: 1;
       margin-right: 20px;
-      background: var(--widget-background-color, var(--tk-color-white));
-      border: 2px solid var(--widget-primary-color, var(--tk-primary));
-      color: var(--widget-primary-text-color, var(--tk-primary));
+      background: var(--tk-color-white);
+      border: 1px solid var(--tk-color-gray-2);
+      color: var(--tk-text);
+      padding: 10px;
     }
 
     .hi-apply-promo-code-button {
       width: 200px;
-      background-color: var(--widget-secondary-color, var(--tk-primary));
-      color: var(--widget-secondary-text-color, var(--tk-color-white));
+      background-color: var(--tk-primary);
+      color: var(--tk-color-white);
       border: none;
+      padding: 12px;
+      cursor: pointer;
+      border-radius: var(--tk-radius-sm);
+      transition: filter 0.3s ease;
+
+      &:hover {
+        filter: brightness(0.9);
+      }
     }
 
     .hi-promo-code-applied {
@@ -159,6 +121,9 @@
 
     .hi-promo-code-applied-remove-icon-button {
       margin-left: 10px;
+      background: none;
+      border: none;
+      cursor: pointer;
     }
   }
 
@@ -166,18 +131,6 @@
     display: flex;
     margin-top: 20px;
     flex-direction: column;
-
-    .hi-ticket-page-message {
-      margin-bottom: 20px;
-      padding: 10px 20px;
-      border-radius: 5px;
-      background-color: var(--widget-secondary-color, var(--tk-secondary));
-    }
-
-    .hi-continue-button {
-      background-color: var(--widget-secondary-color, var(--tk-primary));
-      color: var(--widget-secondary-text-color, var(--tk-color-white));
-    }
   }
 }
 

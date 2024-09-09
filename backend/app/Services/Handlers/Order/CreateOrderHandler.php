@@ -19,52 +19,63 @@ use HiEvents\Services\Infrastructure\Session\CheckoutSessionManagementService;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Validation\UnauthorizedException;
 use Throwable;
+use HiEvents\Repository\Interfaces\OrderRepositoryInterface;
+use HiEvents\Repository;
+
+
 
 readonly class CreateOrderHandler
 {
     public function __construct(
-        private EventRepositoryInterface         $eventRepository,
-        private PromoCodeRepositoryInterface     $promoCodeRepository,
-        private OrderManagementService           $orderManagementService,
-        private OrderItemProcessingService       $orderItemProcessingService,
-        private DatabaseManager                  $databaseManager,
-        private CheckoutSessionManagementService $sessionIdentifierService,
-    )
-    {
+        private readonly EventRepositoryInterface $eventRepository,
+        private readonly PromoCodeRepositoryInterface $promoCodeRepository,
+        private readonly OrderManagementService $orderManagementService,
+        private readonly OrderItemProcessingService $orderItemProcessingService,
+        private readonly DatabaseManager $databaseManager,
+        private readonly CheckoutSessionManagementService $sessionIdentifierService,
+        private readonly OrderRepositoryInterface $orderRepository,
+    ) {
     }
 
     /**
      * @throws Throwable
      */
     public function handle(
-        int                  $eventId,
+        int                  $event_id,
         CreateOrderPublicDTO $createOrderPublicDTO,
         bool                 $deleteExistingOrdersForSession = true
     ): OrderDomainObject
     {
         $sessionId = $this->sessionIdentifierService->getSessionId();
 
-        return $this->databaseManager->transaction(function () use ($sessionId, $eventId, $createOrderPublicDTO, $deleteExistingOrdersForSession) {
+        return $this->databaseManager->transaction(function () use ($event_id, $createOrderPublicDTO, $deleteExistingOrdersForSession, $sessionId) {
             $event = $this->eventRepository
                 ->loadRelation(EventSettingDomainObject::class)
-                ->findById($eventId);
+                ->findById($event_id);
 
             $this->validateEventStatus($event, $createOrderPublicDTO);
 
-            $promoCode = $this->getPromoCode($createOrderPublicDTO, $eventId);
+            $promoCode = $this->getPromoCode($createOrderPublicDTO, $event_id);
 
             if ($deleteExistingOrdersForSession) {
-                $this->orderManagementService->deleteExistingOrders($eventId, $sessionId);
+                $this->orderManagementService->deleteExistingOrders($event_id, $sessionId);
             }
 
             $order = $this->orderManagementService->createNewOrder(
-                eventId: $eventId,
+                event_id: $event_id,
                 event: $event,
                 timeOutMinutes: $event->getEventSettings()?->getOrderTimeoutInMinutes(),
                 locale: $createOrderPublicDTO->order_locale,
                 promoCode: $promoCode,
                 sessionId: $sessionId,
             );
+
+            // Save the order to ensure it has an ID
+            $order = $this->orderRepository->save($order);
+
+            if ($order->getId() === null) {
+                throw new \RuntimeException('Failed to save order and generate ID');
+            }
 
             $orderItems = $this->orderItemProcessingService->process(
                 order: $order,
@@ -77,7 +88,7 @@ readonly class CreateOrderHandler
         });
     }
 
-    private function getPromoCode(CreateOrderPublicDTO $createOrderPublicDTO, int $eventId): ?PromoCodeDomainObject
+    private function getPromoCode(CreateOrderPublicDTO $createOrderPublicDTO, int $event_id): ?PromoCodeDomainObject
     {
         if ($createOrderPublicDTO->promo_code === null) {
             return null;
@@ -85,7 +96,7 @@ readonly class CreateOrderHandler
 
         $promoCode = $this->promoCodeRepository->findFirstWhere([
             PromoCodeDomainObjectAbstract::CODE => strtolower(trim($createOrderPublicDTO->promo_code)),
-            PromoCodeDomainObjectAbstract::EVENT_ID => $eventId,
+            PromoCodeDomainObjectAbstract::EVENT_ID => $event_id,
         ]);
 
         if ($promoCode?->isValid()) {

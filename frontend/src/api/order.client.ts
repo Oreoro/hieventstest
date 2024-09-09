@@ -5,10 +5,21 @@ import {
     IdParam,
     Order,
     QueryFilters,
-    StripePaymentIntent
-} from "../types.ts";
+    Ticket,
+    PromoCode,
+    Question,
+    Event
+    
+
+}
+ from "../types.ts";
 import {api} from "./client.ts";
 import {queryParamsHelper} from "../utilites/queryParamsHelper.ts";
+interface PaymentData {
+    redirect_url?: string;
+    error?: string;
+  }
+
 
 export interface OrderDetails {
     first_name: string,
@@ -51,35 +62,35 @@ export interface RefundOrderPayload {
 }
 
 export const orderClient = {
-    all: async (eventId: IdParam, pagination: QueryFilters) => {
+    all: async (event_id: IdParam, pagination: QueryFilters) => {
         const response = await api.get<GenericPaginatedResponse<Order>>(
-            `events/${eventId}/orders` + queryParamsHelper.buildQueryString(pagination),
+            `/events/${event_id}/orders` + queryParamsHelper.buildQueryString(pagination),
         );
         return response.data;
     },
 
-    findByID: async (eventId: IdParam, orderId: IdParam) => {
-        const response = await api.get<GenericDataResponse<Order>>(`events/${eventId}/orders/${orderId}`);
+    findByID: async (event_id: IdParam, order_id: IdParam) => {
+        const response = await api.get<GenericDataResponse<Order>>(`events/${event_id}/orders/${order_id}`);
         return response.data;
     },
 
-    refund: async (eventId: IdParam, orderId: IdParam, refundPayload: RefundOrderPayload) => {
-        const response = await api.post<GenericDataResponse<Order>>('events/' + eventId + '/orders/' + orderId + '/refund', refundPayload);
+    refund: async (event_id: IdParam, order_id: IdParam, refundPayload: RefundOrderPayload) => {
+        const response = await api.post<GenericDataResponse<Order>>('events/' + event_id + '/orders/' + order_id + '/refund', refundPayload);
         return response.data;
     },
 
-    resendConfirmation: async (eventId: IdParam, orderId: IdParam) => {
-        const response = await api.post<GenericDataResponse<Order>>('events/' + eventId + '/orders/' + orderId + '/resend_confirmation');
+    resendConfirmation: async (event_id: IdParam, order_id: IdParam) => {
+        const response = await api.post<GenericDataResponse<Order>>('events/' + event_id + '/orders/' + order_id + '/resend_confirmation');
         return response.data;
     },
 
-    cancel: async (eventId: IdParam, orderId: IdParam) => {
-        const response = await api.post<GenericDataResponse<Order>>('events/' + eventId + '/orders/' + orderId + '/cancel');
+    cancel: async (event_id: IdParam, order_id: IdParam) => {
+        const response = await api.post<GenericDataResponse<Order>>('events/' + event_id + '/orders/' + order_id + '/cancel');
         return response.data;
     },
 
-    exportOrders: async (eventId: IdParam): Promise<Blob> => {
-        const response = await api.post(`events/${eventId}/orders/export`, {}, {
+    exportOrders: async (event_id: IdParam): Promise<Blob> => {
+        const response = await api.post(`public/events/${event_iddd}/orders/export`, {}, {
             responseType: 'blob',
         });
 
@@ -88,34 +99,50 @@ export const orderClient = {
 }
 
 export const orderClientPublic = {
-    create: async (eventId: number, createOrderPayload: TicketFormPayload) => {
-        const response = await publicApi.post<GenericDataResponse<Order>>('events/' + eventId + '/order', createOrderPayload);
+    create: async (event_id: number, createOrderPayload: TicketFormPayload) => {
+        const response = await publicApi.post<GenericDataResponse<Order>>(`events/${event_id}/orders`, createOrderPayload);
         return response.data;
     },
 
-    findByShortId: async (eventId: number, orderShortId: string, sessionIdentifier: string) => {
-        const response = await publicApi.get<GenericDataResponse<Order>>(`events/${eventId}/order/${orderShortId}?session_identifier=${sessionIdentifier}`);
+    findByShortId: async (event_id: number, orderShortId: string, sessionIdentifier: string) => {
+        const response = await publicApi.get<GenericDataResponse<Order>>(`events/${event_id}/orders/${orderShortId}?session_identifier=${sessionIdentifier}`);
         return response.data;
     },
 
-    findOrderStripePaymentIntent: async (eventId: number, orderShortId: string) => {
-        return await publicApi.get<StripePaymentIntent>(`events/${eventId}/order/${orderShortId}/stripe/payment_intent`);
-    },
-
-    createStripePaymentIntent: async (eventId: number, orderShortId: string, sessionIdentifier: string) => {
-        const response = await publicApi.post<{
-            client_secret: string,
-            account_id?: string,
-        }>(`events/${eventId}/order/${orderShortId}/stripe/payment_intent?session_identifier=${sessionIdentifier}`);
+    initiateJazzCashPayment: async (event_id: number, orderShortId: string) => {
+        const response = await publicApi.post<JazzCashInitiateResponse>(
+            `events/${event_id}/orders/${orderShortId}/jazzcash/initiate`
+        );
         return response.data;
     },
+
 
     finaliseOrder: async (
-        eventId: number,
+        event_id: number,
         orderShortId: string,
         payload: FinaliseOrderPayload
     ) => {
-        const response = await publicApi.put<GenericDataResponse<Order>>(`events/${eventId}/order/${orderShortId}`, payload);
+        const response = await publicApi.put<GenericDataResponse<Order>>(`events/${event_id}/orders/${orderShortId}`, payload);
         return response.data;
     },
-}
+
+    // Add other methods as needed, for example:
+    getEventDetails: async (event_id: number) => {
+        const response = await publicApi.get<GenericDataResponse<Event>>(`events/${event_id}`);
+        return response.data;
+    },
+
+    getEventTickets: async (event_id: number) => {
+        const response = await publicApi.get<GenericDataResponse<Ticket[]>>(`events/${event_id}/tickets`);
+        return response.data;
+    },
+    getPromoCode: async (event_id: number, promoCode: string) => {
+        const response = await publicApi.get<GenericDataResponse<PromoCode>>(`events/${event_id}/promo-codes/${promoCode}`);
+        return response.data;
+    },
+
+    getEventQuestions: async (event_id: number) => {
+        const response = await publicApi.get<GenericDataResponse<Question[]>>(`events/${event_id}/questions`);
+        return response.data;
+    },
+};

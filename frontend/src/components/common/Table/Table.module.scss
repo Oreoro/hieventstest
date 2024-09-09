@@ -4,15 +4,25 @@
   white-space: nowrap;
 
   th {
-    background-color: #462e7812;
-    color: var(--tk-secondary-text) !important;
-    padding: 0.75rem 0.625rem !important;
+    background-color: var(--tk-secondary);
+    color: var(--tk-primary);
+    padding: 1rem 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
   }
 }
 
 .card {
-  padding: 0 !important;
+  padding: 0;
   overflow: hidden;
+  border-radius: var(--tk-radius-lg);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  }
 
   .mantine-ScrollArea-viewport {
     padding-bottom: 0;
@@ -21,7 +31,15 @@
 
 .table {
   tr td, tr, th {
-    padding: 15px !important;
+    padding: 1rem 0.75rem;
     white-space: nowrap;
+  }
+
+  tr:nth-child(even) {
+    background-color: var(--tk-secondary);
+  }
+
+  tr:hover {
+    background-color: rgba(74, 144, 226, 0.05);
   }
 }

@@ -10,6 +10,19 @@ use HiEvents\DomainObjects\Status\OrderStatus;
 
 class OrderDomainObject extends Generated\OrderDomainObjectAbstract implements IsSortable
 {
+
+    public function getId(): ?int
+    {
+        return $this->id ?? null;  // Return null if id is not set
+    }
+
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+
     /** @var Collection<OrderItemDomainObject>|null */
     public ?Collection $orderItems = null;
 

@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Actions\HandleJazzCashResponse;
 use HiEvents\Http\Actions\Orders\InitiateJazzCashPayment;
-
+use HiEvents\Http\Actions\Orders\HandleJazzCashPayment;
+use App\Http\Controllers\JazzCashController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +19,16 @@ use HiEvents\Http\Actions\Orders\InitiateJazzCashPayment;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::post('/jazzcash/callback/{event_id}/{order_id}', [HandleJazzCashPayment::class, 'handle'])->name('jazzcash.callback');
+
+Route::post('events/{event_id}/orders/{order_id}/jazzcash/initiate', InitiateJazzCashPayment::class)
+    ->name('events.orders.jazzcash.initiate');
+
+
+
+
 
 
 

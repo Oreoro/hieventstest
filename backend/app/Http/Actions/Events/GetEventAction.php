@@ -1,6 +1,5 @@
 <?php
 
-declare(strict_types=1);
 
 namespace HiEvents\Http\Actions\Events;
 
@@ -24,9 +23,13 @@ class GetEventAction extends BaseAction
         $this->eventRepository = $eventRepository;
     }
 
-    public function __invoke(int $eventId): JsonResponse
+    public function __invoke($event_id): JsonResponse
     {
-        $this->isActionAuthorized($eventId, EventDomainObject::class);
+        $event_id = (int) $event_id;
+        if (!is_int($event_id)) {
+            throw new \InvalidArgumentException('Event ID must be an integer');
+        }
+        $this->isActionAuthorized($event_id, EventDomainObject::class);
 
         $event = $this->eventRepository
             ->loadRelation(new Relationship(domainObject: OrganizerDomainObject::class, name: 'organizer'))
@@ -36,7 +39,7 @@ class GetEventAction extends BaseAction
                     new Relationship(TaxAndFeesDomainObject::class),
                 ]),
             )
-            ->findById($eventId);
+            ->findById($event_id);
 
         return $this->resourceResponse(EventResource::class, $event);
     }

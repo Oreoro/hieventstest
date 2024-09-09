@@ -24,9 +24,9 @@ class UpdateEventAction extends BaseAction
     /**
      * @throws Throwable|ValidationException
      */
-    public function __invoke(UpdateEventRequest $request, int $eventId): JsonResponse
+    public function __invoke(UpdateEventRequest $request, int $event_id): JsonResponse
     {
-        $this->isActionAuthorized($eventId, EventDomainObject::class);
+        $this->isActionAuthorized($event_id, EventDomainObject::class);
         $authorisedUser = $this->getAuthenticatedUser();
 
         try {
@@ -35,7 +35,7 @@ class UpdateEventAction extends BaseAction
                     array_merge(
                         $request->validated(),
                         [
-                            'id' => $eventId,
+                            'id' => $event_id,
                             'account_id' => $this->getAuthenticatedAccountId(),
                             'user_id' => $authorisedUser->getId(),
                         ]
