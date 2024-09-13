@@ -38,4 +38,7 @@ return [
         'return_url' => env('JAZZCASH_RETURN_URL'),
         'environment' => env('JAZZCASH_ENVIRONMENT', 'sandbox'),
     ],
+    'stripe' => [
+        'secret' => env('STRIPE_SECRET'),
+    ]
 ];

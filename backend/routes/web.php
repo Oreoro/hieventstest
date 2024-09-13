@@ -1,9 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Actions\HandleJazzCashResponse;
-use HiEvents\Http\Actions\Orders\InitiateJazzCashPayment;
-
+use HiEvents\Http\Actions\Orders\StripeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +18,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/payment/return', function () {
+    dd('success');
+});
 
+Route::get('/checkout/stripe', [StripeController::class, 'checkoutStripe'])->name('jazzcash.checkout');
+Route::post('/process-payment', [StripeController::class, 'processPayment'])->name('process.payment');
 
+// Route::post('/jazzcash/callback/{event_id}/{order_id}', [HandleJazzCashPayment::class, 'handle'])->name('jazzcash.callback');
 
-
-
-
+// Route::post('events/{event_id}/orders/{order_id}/jazzcash/initiate', InitiateJazzCashPayment::class)
+//     ->name('events.orders.jazzcash.initiate');
