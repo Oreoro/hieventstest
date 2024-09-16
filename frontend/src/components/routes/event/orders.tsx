@@ -53,7 +53,7 @@ export const Orders = () => {
                 <Button
                     onClick={() => handleExport(eventId)}
                     rightSection={<IconDownload size={14}/>}
-                    color={'green'}
+                    color={'black'}
                     loading={downloadPending}>
                     {t`Export`}
                 </Button>

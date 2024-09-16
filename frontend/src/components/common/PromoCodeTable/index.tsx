@@ -52,7 +52,7 @@ export const PromoCodeTable = ({event, promoCodes, openCreateModal}: PromoCodeTa
                     <Button
                         size={'xs'}
                         leftSection={<IconPlus/>}
-                        color={'green'}
+                        color={'black'}
                         onClick={() => openCreateModal()}>{t`Create a Promo Code`}
                     </Button>
                 </>
@@ -97,7 +97,7 @@ export const PromoCodeTable = ({event, promoCodes, openCreateModal}: PromoCodeTa
                                     title={t`Click to copy`}
                                     style={{cursor: 'pointer', alignItems: 'center'}}
                                     rightSection={(<Flex>
-                                        {clipboard.copied ? <IconCheck color={'green'} size={'12'}/> :
+                                        {clipboard.copied ? <IconCheck color={'black'} size={'12'}/> :
                                             <IconCopy size={'12'}/>}
                                     </Flex>)}
                                     onClick={() => {
@@ -127,7 +127,7 @@ export const PromoCodeTable = ({event, promoCodes, openCreateModal}: PromoCodeTa
                                 <MantineTable.Td>
                                     <div style={{cursor: 'pointer'}}>
                                         {code.applicable_ticket_ids?.length === 0 && (
-                                            <Badge variant={'light'} color={'pink'}>{t`All Tickets`}</Badge>
+                                            <Badge variant={'light'} color={'black'}>{t`All Tickets`}</Badge>
                                         )}
 
                                         {Number(code.applicable_ticket_ids?.length) > 0 && (
@@ -144,7 +144,7 @@ export const PromoCodeTable = ({event, promoCodes, openCreateModal}: PromoCodeTa
                                                     })}>
                                                 <Badge
                                                     variant={'light'}
-                                                    color={'pink'}>{code.applicable_ticket_ids?.length} {t`Ticket(s)`}</Badge>
+                                                    color={'black'}>{code.applicable_ticket_ids?.length} {t`Ticket(s)`}</Badge>
                                             </Tooltip>
                                         )}
                                     </div>

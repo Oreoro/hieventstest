@@ -17,7 +17,7 @@ export const Footer = () => {
          * If you wish to remove this notice, a commercial license is available at: https://hi.events/licensing
          */
         <footer className={classes.footer}>
-            <PoweredByFooter/>
+        
         </footer>
     )
 }

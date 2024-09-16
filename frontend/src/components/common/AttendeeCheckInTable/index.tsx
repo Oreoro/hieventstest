@@ -120,7 +120,7 @@ export const AttendeesCheckInTable = () => {
                                 </div>
                                 <div className={classes.actions}>
                                     <Switch
-                                        color={'green'}
+                                        color={'black'}
                                         onLabel={t`Checked In`}
                                         offLabel={t`Not Checked In`}
                                         size="xl"

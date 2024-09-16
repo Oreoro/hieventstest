@@ -71,7 +71,7 @@ const OrganizerDashboard = () => {
             )}>
                 <>
                     <Button
-                        color={'green'}
+                        color={'black'}
                         rightSection={
                             <IconCalendarPlus stroke={1.5}/>
                         }

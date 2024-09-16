@@ -53,7 +53,7 @@ export const CreateCapacityAssignmentModal = ({onClose}: GenericModalProps) => {
                         <Button
                             size={'xs'}
                             leftSection={<IconPlus/>}
-                            color={'green'}
+                            color={'black'}
                             onClick={() => window.location.href = `/manage/event/${eventId}/tickets/#create-ticket`}
                         >
                             {t`Create a Ticket`}

@@ -23,13 +23,13 @@ export const GlobalMenu = () => {
         {
             label: t`Help & Support`,
             icon: IconLifebuoy,
-            link: 'https://hi.events/docs?utm_source=app-top-menu-help-support',
+            link: 'mailto:bilalpakistan2002@gmail.com',
             target: '_blank',
         },
         {
             label: t`Feedback`,
             icon: IconSpeakerphone,
-            link: 'mailto:hello@hi.events?subject=Feedback',
+            link: 'mailto:bilalpakistan2002@gmail.com',
             target: '_blank',
         },
         {
@@ -48,7 +48,7 @@ export const GlobalMenu = () => {
         <Menu shadow="md" width={200}>
             <Menu.Target>
                 <UnstyledButton>
-                    <Avatar color={'pink'} radius="xl">
+                    <Avatar color={'white'} radius="xl">
                         {me
                             ? getInitials(me.first_name + ' ' + me.last_name)
                             : '..'}

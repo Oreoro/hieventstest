@@ -41,7 +41,7 @@ const GettingStarted = () => {
     const Check = () => {
         return (
             <Tooltip label={t`Completed`}>
-                <Button ml={10} variant={'light'} color={'green'}>
+                <Button ml={10} variant={'light'} color={'black'}>
                     <IconCheck/>
                 </Button>
             </Tooltip>

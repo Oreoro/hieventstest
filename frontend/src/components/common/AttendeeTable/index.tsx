@@ -64,7 +64,7 @@ export const AttendeeTable = ({attendees, openCreateModal}: AttendeeTableProps) 
                     <Button
                         size={'xs'}
                         leftSection={<IconPlus/>}
-                        color={'green'}
+                        color={'black'}
                         onClick={() => openCreateModal()}>{t`Manually add an Attendee`}
                     </Button>
                 </>
@@ -92,7 +92,7 @@ export const AttendeeTable = ({attendees, openCreateModal}: AttendeeTableProps) 
                                 Successfully {attendee.status === 'CANCELLED' ? 'activated' : 'cancelled'} attendee
                             </Trans>
                         ),
-                        color: 'green',
+                        color: 'black',
                     });
                 },
                 onError: () => showError(t`Failed to cancel attendee`),
@@ -153,7 +153,7 @@ export const AttendeeTable = ({attendees, openCreateModal}: AttendeeTableProps) 
                                 <MantineTable.Td>
                                     <Badge
                                         variant={'light'}
-                                        color={attendee.status === 'CANCELLED' ? 'red' : 'green'}>{attendee.status}</Badge>
+                                        color={attendee.status === 'CANCELLED' ? 'red' : 'black'}>{attendee.status}</Badge>
                                 </MantineTable.Td>
                                 <MantineTable.Td style={{paddingRight: 0}}>
                                     <ActionMenu itemsGroups={[
@@ -190,7 +190,7 @@ export const AttendeeTable = ({attendees, openCreateModal}: AttendeeTableProps) 
                                                     label: attendee.status === 'CANCELLED' ? t`Activate` : t`Cancel` + ` ` + t`ticket`,
                                                     icon: <IconTrash size={14}/>,
                                                     onClick: () => handleCancel(attendee),
-                                                    color: attendee.status === 'CANCELLED' ? 'green' : 'red',
+                                                    color: attendee.status === 'CANCELLED' ? 'black' : 'red',
                                                 },
                                             ],
                                         },

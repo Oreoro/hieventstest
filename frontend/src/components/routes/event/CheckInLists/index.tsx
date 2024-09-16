@@ -42,7 +42,7 @@ const CheckInLists = () => {
             )}>
                 <Button
                     leftSection={<IconPlus/>}
-                    color={'green'}
+                    color={'black'}
                     onClick={openCreateModal}>{t`Create Check-In List`}
                 </Button>
             </ToolBar>

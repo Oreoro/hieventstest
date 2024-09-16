@@ -40,7 +40,7 @@ const AuthLayout = () => {
                         * If you wish to remove this notice, a commercial license is available at: https://hi.events/licensing
                         */
                     }
-                    <PoweredByFooter/>
+                
                 </div>
             </main>
         </>

@@ -69,8 +69,8 @@ export const EventDashboard = () => {
                         legendProps={{verticalAlign: 'bottom', height: 50}}
 
                         series={[
-                            {name: 'orders_created', color: 'blue.6', label: t`Orders Created`},
-                            {name: 'tickets_sold', color: 'blue.2', label: t`Tickets Sold`},
+                            {name: 'orders_created', color: 'black', label: t`Orders Created`},
+                            {name: 'tickets_sold', color: 'black', label: t`Tickets Sold`},
                         ]}
                         curveType="natural"
                         tickLine="none"
@@ -103,9 +103,9 @@ export const EventDashboard = () => {
                         withLegend
                         legendProps={{verticalAlign: 'bottom', height: 50}}
                         series={[
-                            {name: 'total_fees', label: t`Total Fees`, color: 'purple.3'},
-                            {name: 'total_sales_gross', label: t`Gross Sales`, color: 'grape.5'},
-                            {name: 'total_tax', label: t`Total Tax`, color: 'grape.7'},
+                            {name: 'total_fees', label: t`Total Fees`, color: 'black'},
+                            {name: 'total_sales_gross', label: t`Gross Sales`, color: 'black'},
+                            {name: 'total_tax', label: t`Total Tax`, color: 'black'},
                         ]}
                         curveType="natural"
                         tickLine="none"

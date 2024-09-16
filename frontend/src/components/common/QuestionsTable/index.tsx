@@ -258,7 +258,7 @@ export const QuestionsTable = ({questions}: QuestionsTableProp) => {
             </PageTitle>
             <Card>
                 <div className={classes.actions}>
-                    <Button color={'green'} rightSection={<IconPlus/>} onClick={openCreateModal}>
+                    <Button color={'black'} rightSection={<IconPlus/>} onClick={openCreateModal}>
                         {t`Add question`}
                     </Button>
                     <div className={classes.hiddenToggle}>

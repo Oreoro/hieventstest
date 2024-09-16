@@ -65,7 +65,7 @@ export const CheckInListList = ({checkInLists, openCreateModal}: CheckInListList
                         <Button
                             size={'xs'}
                             leftSection={<IconPlus/>}
-                            color={'green'}
+                            color={'black'}
                             onClick={() => openCreateModal()}>{t`Create Check-In List`}
                         </Button>
                     </>
@@ -120,7 +120,7 @@ export const CheckInListList = ({checkInLists, openCreateModal}: CheckInListList
                                 <div className={classes.capacityAssignmentStatus}>
                                     <Popover title={statusMessage} position={'bottom'} withArrow>
                                         <Badge variant={'light'}
-                                               color={(!list.is_expired && list.is_active) ? 'green' : 'gray'}>
+                                               color={(!list.is_expired && list.is_active) ? 'black' : 'gray'}>
                                             {!list.is_expired && list.is_active ? t`Active` : t`Inactive`}
                                         </Badge>
                                     </Popover>
@@ -138,7 +138,7 @@ export const CheckInListList = ({checkInLists, openCreateModal}: CheckInListList
                                     <Progress
                                         value={checkInLists.length === 0 ? 0 : (list.checked_in_attendees / list.total_attendees) * 100}
                                         radius={'xl'}
-                                        color={list.checked_in_attendees === list.total_attendees ? 'purple' : 'green'}
+                                        color={list.checked_in_attendees === list.total_attendees ? 'black' : 'black'}
                                         size={'xl'}
                                         style={{marginTop: '10px'}}
                                     />

@@ -49,7 +49,7 @@ const PrintTicket = () => {
 
             {(event?.settings?.is_online_event && <OnlineEventDetails eventSettings={event.settings}/>)}
 
-            <PoweredByFooter/>
+           
         </Container>
     )
 }

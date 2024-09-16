@@ -44,7 +44,7 @@ export const Tickets = () => {
                     pagination={pagination}
                 />
             )}>
-                <Button color={'green'} size={'sm'} onClick={openCreateModal} rightSection={<IconTicket/>}>
+                <Button color={'black'} size={'sm'} onClick={openCreateModal} rightSection={<IconTicket/>}>
                     {t`Create Ticket`}
                 </Button>
             </ToolBar>

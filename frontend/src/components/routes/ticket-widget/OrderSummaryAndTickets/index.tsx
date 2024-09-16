@@ -123,7 +123,7 @@ export const OrderSummaryAndTickets = () => {
                      * If you wish to remove this notice, a commercial license is available at: https://hi.events/licensing
                      */
                 }
-                <PoweredByFooter/>
+               
             </CheckoutContent>
             <CheckoutFooter
                 isOrderComplete={true}

@@ -5,7 +5,7 @@ import React, {ReactNode} from "react";
 export const showSuccess = (message: ReactNode) => {
     notifications.show({
         message: message,
-        color: 'green',
+        color: 'black',
         icon: <IconCheck/>
     })
 }

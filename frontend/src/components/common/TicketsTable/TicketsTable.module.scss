@@ -8,7 +8,7 @@
     display: grid;
     padding: 20px;
     margin-bottom: 20px;
-    //border-top: 3px solid var(--tk-color-money-green) !important;
+    //border-top: 3px solid var(--tk-color-money-black) !important;
     position: relative;
     gap: 10px;
 
@@ -109,7 +109,7 @@
         }
 
         .price {
-          color: var(--tk-color-money-green);
+          color: var(--tk-color-money-black);
 
           .priceAmount {
             font-weight: 600;

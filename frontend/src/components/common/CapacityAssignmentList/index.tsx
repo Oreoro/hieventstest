@@ -59,7 +59,7 @@ export const CapacityAssignmentList = ({capacityAssignments, openCreateModal}: C
                         <Button
                             size={'xs'}
                             leftSection={<IconPlus/>}
-                            color={'green'}
+                            color={'black'}
                             onClick={() => openCreateModal()}>{t`Create Capacity Assignment`}
                         </Button>
                     </>
@@ -75,7 +75,7 @@ export const CapacityAssignmentList = ({capacityAssignments, openCreateModal}: C
                     const capacityPercentage = assignment.capacity
                         ? (assignment.used_capacity / assignment.capacity) * 100
                         : 0;
-                    const capacityColor = capacityPercentage > 80 ? 'red' : capacityPercentage > 50 ? 'yellow' : 'green';
+                    const capacityColor = capacityPercentage > 80 ? 'red' : capacityPercentage > 50 ? 'yellow' : 'black';
 
                     return (
                         <Card className={classes.capacityCard} key={assignment.id}>
@@ -105,7 +105,7 @@ export const CapacityAssignmentList = ({capacityAssignments, openCreateModal}: C
                                 </div>
 
                                 <div className={classes.capacityAssignmentStatus}>
-                                    <Badge variant={'light'} color={assignment.status === 'ACTIVE' ? 'green' : 'gray'}>
+                                    <Badge variant={'light'} color={assignment.status === 'ACTIVE' ? 'black' : 'gray'}>
                                         {assignment.status}
                                     </Badge>
                                 </div>

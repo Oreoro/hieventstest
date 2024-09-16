@@ -101,7 +101,7 @@ export const CreateEvent = () => {
 
                     <Button
                         type={'submit'}
-                        color={'green'}
+                        color={'black'}
                         fullWidth
                         loading={eventMutation.isLoading}
                     >

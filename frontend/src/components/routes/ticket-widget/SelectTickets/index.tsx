@@ -413,9 +413,7 @@ const SelectTickets = (props: SelectTicketsProps) => {
                  * If you wish to remove this notice, a commercial license is available at: https://hi.events/licensing
                  */
             }
-            <PoweredByFooter style={{
-                'color': props.colors?.primaryText || '#000',
-            }}/>
+           
         </div>
     );
 }

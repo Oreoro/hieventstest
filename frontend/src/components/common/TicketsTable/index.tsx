@@ -70,7 +70,7 @@ export const TicketsTable = ({tickets, openCreateModal, enableSorting = false}: 
                     <Button
                         size={'xs'}
                         leftSection={<IconPlus/>}
-                        color={'green'}
+                        color={'black'}
                         onClick={() => openCreateModal()}>{t`Create a Ticket`}
                     </Button>
                 </>

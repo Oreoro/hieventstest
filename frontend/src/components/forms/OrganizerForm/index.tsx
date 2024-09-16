@@ -107,7 +107,7 @@ export const OrganizerCreateForm = ({onSuccess}: OrganizerFormProps) => {
                     <Group gap={10}>
                         <Button fullWidth loading={organizerMutation.isLoading}
                                 type={'submit'}
-                                color={'green'}>{t`Create Organizer`}
+                                color={'black'}>{t`Create Organizer`}
                         </Button>
                     </Group>
                 </fieldset>

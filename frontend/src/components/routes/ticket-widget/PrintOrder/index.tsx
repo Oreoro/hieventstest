@@ -53,7 +53,7 @@ export const PrintOrder = () => {
                     );
                 })}
 
-                <PoweredByFooter/>
+                
             </Container>
         </>
     );

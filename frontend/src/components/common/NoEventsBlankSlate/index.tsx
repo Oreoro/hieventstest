@@ -23,7 +23,7 @@ export const NoEventsBlankSlate = ({eventsState, openCreateModal}: NoEventsBlank
                     <Button
                         size={'xs'}
                         leftSection={<IconPlus/>}
-                        color={'green'}
+                        color={'black'}
                         onClick={openCreateModal}>{t`Create Event`}
                     </Button>
                 </>

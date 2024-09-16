@@ -24,7 +24,7 @@ export const OrderAmountPopover = ({event, order}: OrderAmountPopoverProps) => {
             case 'REFUNDED':
                 return 'red';
             default:
-                return 'green';
+                return 'black';
         }
     }
 

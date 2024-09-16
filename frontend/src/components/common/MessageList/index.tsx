@@ -25,7 +25,7 @@ const SingleMessage = ({message}: { message: Message }) => {
 
                 <div className={classes.status}>
                     <Badge
-                        color={message.status === "SENT" ? "green" : "orange"}
+                        color={message.status === "SENT" ? "black" : "orange"}
                         variant={"outline"}>
                         {message.status}
                     </Badge>

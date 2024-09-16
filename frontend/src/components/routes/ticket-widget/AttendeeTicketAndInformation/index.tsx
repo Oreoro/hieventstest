@@ -42,7 +42,7 @@ export const AttendeeTicketAndInformation = () => {
 
             {(event?.settings?.is_online_event && <OnlineEventDetails eventSettings={event.settings}/>)}
 
-            <PoweredByFooter/>
+            
         </Container>
     )
 }

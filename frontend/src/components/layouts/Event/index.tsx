@@ -174,7 +174,7 @@ const EventLayout = () => {
             <div className={classes.sidebar}>
                 <div className={classes.logo}>
                     <NavLink to={'/manage/events'}>
-                        <img style={{maxWidth: '170px', margin: "20px auto"}}
+                        <img style={{maxWidth: '70vw', margin: "0px auto" , height:"22vh"} }
                              src={'/logo.svg'} alt={''}/>
                     </NavLink>
                 </div>

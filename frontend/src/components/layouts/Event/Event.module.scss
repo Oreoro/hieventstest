@@ -34,7 +34,7 @@
 
   .topBar {
     grid-area: topbar;
-    background: var(--tk-background-light);
+    background-color: white!important;
     align-items: center;
     padding: var(--tk-spacing-md);
     display: flex;
@@ -43,6 +43,7 @@
     top: 0;
     box-shadow: 0 5px 5px 0 #00000005;
     z-index: 1;
+    color: white, i !important; ;
 
     .breadcrumbs {
       font-weight: 500;
@@ -101,7 +102,7 @@
     }
 
     @include respond-above(md) {
-      background-color: white;
+      background-color: rgb(0, 0, 0);
     }
   }
 
@@ -116,7 +117,7 @@
   .sidebar {
     overflow: auto;
     grid-area: sidebar;
-    background: linear-gradient(270deg, var(--tk-primary), #7d5eba);
+    background:  #000000;
     color: var(--tk-color-white);
     scrollbar-width: thin;
     scrollbar-color: var(--tk-secondary) transparent;
@@ -156,6 +157,7 @@
       a {
         display: flex;
         width: 100%;
+        color: white !important;
       }
     }
 
@@ -175,13 +177,13 @@
         font-weight: 600;
 
         &.loading {
-          background-color: #4b327d75;
+          background-color: #f0f0f075;
           width: 90%;
           height: 33px;
         }
 
         &.linkActive, &:hover {
-          background: #4b327d75;
+          background: #e4e2e26c;
           color: var(--tk-color-white);
         }
 

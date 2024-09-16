@@ -47,7 +47,7 @@ export const CreateTicketModal = ({onClose}: GenericModalProps) => {
             onSuccess: () => {
                 notifications.show({
                     message: t`Successfully Created Ticket`,
-                    color: 'green',
+                    color: 'black',
                 });
                 queryClient.invalidateQueries({queryKey: [GET_TICKETS_QUERY_KEY]}).then(() => {
                     form.reset();

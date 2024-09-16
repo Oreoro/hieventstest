@@ -139,7 +139,7 @@ export const SortableTicket = ({ticket, enableSorting}: {ticket: Ticket, enableS
                                 <Popover>
                                     <Popover.Target>
                                         <Badge className={classes.status}
-                                               color={ticket.is_available ? 'green' : 'orange'} variant={"outline"}>
+                                               color={ticket.is_available ? 'black' : 'orange'} variant={"outline"}>
                                             {ticket.is_available ? t`On Sale` : t`Not On Sale`}
                                         </Badge>
                                     </Popover.Target>

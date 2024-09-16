@@ -112,7 +112,7 @@ export const ManageProfile = () => {
                     <Tabs.Panel value="profile">
                         <div className={classes.tabWrapper}>
                             {me?.has_pending_email_change && (
-                                <Alert className={classes.emailChangeAlert} variant="light" color="blue"
+                                <Alert className={classes.emailChangeAlert} variant="light" color="black"
                                        title={t`Email change pending`} icon={<IconInfoCircle/>}>
                                     <p>
                                         <Trans>Your email request change to <b>{me?.pending_email}</b> is pending.
@@ -147,7 +147,7 @@ export const ManageProfile = () => {
                                     )}
 
                                     {emailConfirmationResent && (
-                                        <Alert variant="light" mb={10} color="green"
+                                        <Alert variant="light" mb={10} color="black"
                                                title={t`Email confirmation resent`} icon={<IconInfoCircle/>}>
                                             <p>{t`Please check your email to confirm your email address`}</p>
                                         </Alert>

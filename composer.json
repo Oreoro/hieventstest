@@ -1,5 +1,6 @@
 {
     "require": {
-        "spatie/laravel-ignition": "*"
+        "spatie/laravel-ignition": "*",
+        "stripe/stripe-php": "^15.9"
     }
 }
